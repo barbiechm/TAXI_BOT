@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { Telegraf, Markup } = require('telegraf');
-const axios = require('axios');
+
 const http = require('http');
 // TU TOKEN DE BOTFATHER
 const bot = new Telegraf(process.env.BOT_TOKEN);
