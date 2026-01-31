@@ -1,6 +1,7 @@
 require('dotenv').config();
 const { Telegraf, Markup } = require('telegraf');
-
+const axios = require('axios');
+const http = require('http');
 // TU TOKEN DE BOTFATHER
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
@@ -57,6 +58,22 @@ bot.action(/aceptar_(.+)/, async (ctx) => {
 
 // Encender el bot
 bot.launch();
+
+
+const server = http.createServer((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('¡El Bot de Taxi está vivo!');
+});
+
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+    console.log(`Servidor web escuchando en el puerto ${PORT}`);
+});
+
+// 👇 NUEVO: Esto mantiene el bot encendido
+bot.launch(); 
+console.log('🤖 Bot TaxiPueblo v2.0 Activo...');
+
 console.log('Bot de Taxi encendido...');
 
 // Para que Render no cierre el proceso (truco)
